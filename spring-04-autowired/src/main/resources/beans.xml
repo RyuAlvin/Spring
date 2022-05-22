@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--Spring中bean有三种装配机制，分别是：
+            1、在xml中显示配置；
+            2、在java中显示配置；
+            3、隐式的bean发现机制和自动装配。
+
+        Bean的自动装配：
+            自动装配是使用Spring满足bean依赖的一种方法；
+            Spring会在应用上下文中为某个bean寻找其依赖的bean；
+
+        Spring的自动装配需要从两个角度来实现，或者说是两个操作：
+            1、组件扫描（Component Scanning）：Spring会自动发现应用上下文中所创建的bean；
+            2、自动装配（Autowiring）：Spring自动满足bean之间的依赖，也就是我们说的IoC/DI；
+
+            组件扫描和自动装配组合发挥巨大威力，使得显示的配置降低到最少。
+            推荐不使用自动装配xml配置，而使用注解。-->
+
+    <bean id="cat" class="cn.autowired.pojo.Cat"/>
+    <bean id="dog" class="cn.autowired.pojo.Dog"/>
+
+    <bean id="user" class="cn.autowired.pojo.User" autowire="byName">
+        <property name="cat" ref="cat"/>
+        <property name="dog" ref="dog"/>
+        <property name="name" value="ryu"/>
+    </bean>
+</beans>

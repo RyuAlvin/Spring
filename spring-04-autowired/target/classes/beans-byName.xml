@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--byName：
+        当一个bean节点带有autowire="byName"属性时：
+            1、将查找其类中所有的set方法名。例如setCat，获得将set去掉并且首字母小写的字符串，即cat；
+            2、去Spring容器中寻找是否由此字符串名称id的对象；
+            3、如果有，就取出注入；如果没有，就报空指针异常；-->
+
+    <!--如下，cat和dog是都可以正常自动装配到user里的-->
+    <!--<bean id="cat" class="cn.autowired.pojo.Cat"/>-->
+    <bean id="dog" class="cn.autowired.pojo.Dog"/>
+
+    <!--但如果更改了id，则无法正常自动装配到user里，
+            因为去user里找不到对应的catXXX属性。-->
+    <bean id="catXXX" class="cn.autowired.pojo.Cat"/>
+
+    <!--autowire="byName"的情况下，就不用显示地去配置cat和dog了-->
+    <bean id="user" class="cn.autowired.pojo.User" autowire="byName">
+        <property name="name" value="ryu"/>
+    </bean>
+</beans>

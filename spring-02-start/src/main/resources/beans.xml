@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--导入别的spring配置文件，团队合作的时候通过import来实现-->
+    <!--<import resource="{path}/beans.xml"/>-->
+
+    <bean id="user" class="cn.start.pojo.User">
+        <property name="name" value="World"/>
+    </bean>
+
+    <bean id="mysqlImpl" class="cn.start.dao.impl.DBInfoDaoMysqlImpl"></bean>
+    <bean id="oracleImpl" class="cn.start.dao.impl.DBInfoDaoOracleImpl"></bean>
+
+    <bean id="dbInfoService" class="cn.start.service.impl.DBInfoServiceImpl">
+        <property name="dbInfoDao" ref="mysqlImpl"/>
+    </bean>
+
+    <!--以上都是通过无参构造方法来创建-->
+    <!--以下都是通过有参构造方法来创建-->
+    <!--方式一：根据index参数下标设置-->
+    <bean id="userCtrByIndex" class="cn.start.pojo.User">
+        <constructor-arg index="0" value="Ctr index"/>
+    </bean>
+    <!--方式二：根据参数名字设置-->
+    <bean id="userCtrByName" class="cn.start.pojo.User">
+        <constructor-arg name="name" value="Ctr name"/>
+    </bean>
+    <!--方式三：根据参数类型设置-->
+    <bean id="userCtrByType" class="cn.start.pojo.User">
+        <constructor-arg type="java.lang.String" value="Ctr string"/>
+    </bean>
+
+    <bean id="userHasAlias" class="cn.start.pojo.User">
+        <constructor-arg name="name" value="xxxxx"/>
+    </bean>
+    <alias name="userHasAlias" alias="helloihavealias"/>
+
+    <!--name用来设置别名，name可以设置多个别名，可以用逗号，分毫，空格隔开-->
+    <bean id="userHasName" name="user001,user002 user003;user004" class="cn.start.pojo.User">
+        <constructor-arg name="name" value="user001"/>
+    </bean>
+</beans>

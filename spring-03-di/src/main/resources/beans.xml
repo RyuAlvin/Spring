@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--依赖注入（Dependency Injection，DI）
+        依赖：指Bean对象的创建依赖于容器，Bean对象的依赖资源；
+        注入：指Bean对象锁依赖的资源，由容器来设置和装配；-->
+
+    <!--数据类型的属性注入-->
+    <bean id="addr" class="cn.di.pojo.Address">
+        <property name="address" value="东京"/>
+    </bean>
+
+    <bean id="stu" class="cn.di.pojo.Student">
+        <property name="name" value="ryu"/>
+        <property name="address" ref="addr"/>
+        <property name="card">
+            <map>
+                <entry key="荒川区" value="1160003"/>
+                <entry key="江东区" value="1360072"/>
+            </map>
+        </property>
+        <property name="games">
+            <set>
+                <value>和平精英</value>
+                <value>极品飞车</value>
+            </set>
+        </property>
+        <property name="hobbys">
+            <list>
+                <value>游泳</value>
+                <value>睡觉</value>
+            </list>
+        </property>
+        <property name="info">
+            <props>
+                <prop key="性别">男</prop>
+                <prop key="体重">64kg</prop>
+            </props>
+        </property>
+        <property name="wife" value="未婚"/>
+        <property name="salary">
+            <null/>
+        </property>
+    </bean>
+
+    <!--p命名空间注入
+        p(属性：properties)命名空间，属性依然要设置set方法
+        xmlns:p="http://www.springframework.org/schema/p"
+        -->
+    <bean id="addrP" class="cn.di.pojo.Address" p:address="中国"/>
+
+    <!--c命名空间注入
+        c(属性：constructor)命名空间，属性依然要设置set方法
+        xmlns:p="http://www.springframework.org/schema/c"
+
+        注意：在这里只加命名空间c的话，c:address会报红，必须在Address类中加入有参构造器
+                但在加入有参构造器后，上面的p命名空间注入方式中的"cn.di.pojo.Address"会报红线，
+                    需要在Address类中加入无参构造器
+        -->
+    <bean id="addrC" class="cn.di.pojo.Address" c:address="日本"/>
+
+</beans>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="cat" class="cn.autowired.pojo.Cat"/>
+    <bean id="dog" class="cn.autowired.pojo.Dog"/>
+
+    <bean id="user" class="cn.autowired.pojo.User">
+        <constructor-arg name="cat" ref="cat"/>
+        <constructor-arg name="dog" ref="dog"/>
+        <constructor-arg name="name" value="ryu"/>
+    </bean>
+</beans>

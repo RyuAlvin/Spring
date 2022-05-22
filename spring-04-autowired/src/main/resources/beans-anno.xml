@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation=
+               "http://www.springframework.org/schema/beans
+               http://www.springframework.org/schema/beans/spring-beans.xsd
+               http://www.springframework.org/schema/context
+               http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--JDK1.5开始支持注解，Spring2.5开始全面支持注解
+        步骤：
+            1、在Spring配置文件中引入context文件开头：
+                xmlns:context="http://www.springframework.org/schema/context"
+                http://www.springframework.org/schema/context
+                http://www.springframework.org/schema/context/spring-beans.xsd
+            2、开启属性注解支持-->
+
+    <!--开启属性注解支持-->
+    <context:annotation-config/>
+
+    <bean id="cat1" class="cn.autowired.anno.pojo.Cat"/>
+    <bean id="cat2" class="cn.autowired.anno.pojo.Cat"/>
+    <bean id="cat3" class="cn.autowired.anno.pojo.Cat"/>
+    <bean id="dog" class="cn.autowired.anno.pojo.Dog"/>
+    <bean id="user" class="cn.autowired.anno.pojo.User"/>
+</beans>

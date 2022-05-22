@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--使用autowire="byType"时需要保证同一类型的对象，在Spring容器中唯一-->
+
+    <bean id="catXXX" class="cn.autowired.pojo.Cat"/>
+    <bean id="catYYY" class="cn.autowired.pojo.Cat"/>
+    <bean id="dog" class="cn.autowired.pojo.Dog"/>
+
+    <bean id="user" class="cn.autowired.pojo.User" autowire="byType">
+        <property name="name" value="Ryu"/>
+    </bean>
+</beans>

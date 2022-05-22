@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--Singleton：
+        当一个bean的作用域为Singleton，那么Spring IoC容器中只会存在一个共享的bean实例，
+            并且所有对bean的亲故，只要id与该bean定义相匹配，则只会返回bean的同一实例。
+        Singleton是单例类型，就是在创建容器时就同时自动创建了一个bean的对象，
+            不管你是否使用，它都存在了，每次获取到的对象都是同一个对象。
+        注意：Singleton作用域是Spring中的缺省作用域。要在xml中将bean定义成singleton，可以进行如下配置：-->
+    <bean id="addrSingleton" class="cn.di.pojo.Address" scope="singleton"/>
+</beans>
