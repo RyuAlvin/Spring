@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="annotationPointcut" class="cn.aop.method3.AnnotationPointcut"/>
+    <!--声明自动为spring容器中那些配置@Aspect切面的bean创建代理，织入切面。
+        当然Spring在内部依旧采用AnnotationAwareAspectJAutoProxyCreator进行自动代理的创建工作，
+        但具体实现的细节已经被<aop:aspectj-autoproxy/>隐藏起来了
+
+        proxy-target-class
+            默认为false，表示使用JDK动态代理织入增强，
+                即使为false，如果目标类没有声明接口，则Spring将自动使用CGLIB动态代理
+            当为true时，表示使用CGLIB动态代理技术织入增强。-->
+    <aop:aspectj-autoproxy/>
+</beans>
