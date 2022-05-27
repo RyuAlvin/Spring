@@ -3,7 +3,9 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:c="http://www.springframework.org/schema/c"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!--依赖注入（Dependency Injection，DI）
         依赖：指Bean对象的创建依赖于容器，Bean对象的依赖资源；
@@ -33,6 +35,8 @@
             <list>
                 <value>游泳</value>
                 <value>睡觉</value>
+                <!--效果：看书<<三体>>-->
+                <value>看书<![CDATA[<<三体>>]]></value>
             </list>
         </property>
         <property name="info">
@@ -43,6 +47,7 @@
         </property>
         <property name="wife" value="未婚"/>
         <property name="salary">
+            <!--注入空值-->
             <null/>
         </property>
     </bean>
@@ -62,5 +67,7 @@
                     需要在Address类中加入无参构造器
         -->
     <bean id="addrC" class="cn.di.pojo.Address" c:address="日本"/>
+
+
 
 </beans>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--Mybatis-Spring会帮助你将Mybatis代码无缝地整合到Spring中-->
+
+    <context:annotation-config/>
+
+    <!--classpath:和classpath*:的区别：
+            [classpath]：只会到你的class路径中查找文件；
+            [classpath*:]：不仅包含class路径，还包括jar文件中（class路径）进行查找-->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${dep.driver}"/>
+        <property name="url" value="${dep.url}"/>
+        <property name="username" value="${dep.username}"/>
+        <property name="password" value="${dep.password}"/>
+    </bean>
+
+    <!--在Mybatis-Spring中，可使用SqlSessionFactoryBean来创建SqlSessionFactory，
+            相当于原Mybatis里的SqlSessionFactoryBuilder。-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!--用来指定Mybatis的xml配置文件路径，需要注意的是：
+                这个配置文件并不需要一个完整的Mybatis配置，
+                任何环境配置<environment>都会被忽略，
+                SqlSessionFactoryBean会创建它自有的Mybatis环境配置。-->
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <!--如果在mybatis-config里配置了<mappers>的话，这里就不用配置mapperLocations属性了-->
+        <!--<property name="mapperLocations" value="classpath:cn/mybatis/dao/*.xml"/>-->
+
+        <!--这里还可以配置很多mybatis-config配置，都整合到Spring中以后可以完全不要mybatis的配置文件，
+                除了这些方式可以实现整合以外，我们还可以用注解来实现-->
+        <!--<property name="typeAliases" value=""/>-->
+    </bean>
+
+    <!--SqlSessionTemplate是Mybatis-Spring的核心，作为SqlSession的一个实现，
+            这意味着可以使用它无缝代替你代码中已经在使用的SqlSession。
+        模版可以参与到Spring的事务管理中，并且由于其是线程安全的，可以供多个映射器类使用，
+            你应该总是用SqlSessionTemplate来替换Mybatis默认的DefaultSqlSession实现。
+            在同一应用程序中的不同类之间混杂使用可能会引起数据一致性的问题。-->
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactory"/>
+    </bean>
+
+    <bean id="userMapper" class="cn.mybatis.dao.UserMapperImpl">
+        <property name="sqlSession" ref="sqlSession"/>
+    </bean>
+
+    <!--▲整合方式一：-->
+    <!--▼整合方式二：-->
+    <bean id="userDao" class="cn.mybatis.support.UserDaoImpl">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+</beans>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--Spring有两种类型bean，一种普通bean，另外一种工厂bean（FactoryBean）
+            普通bean：在配置文件中定义bean类型就是返回累心过；
+            工厂bean：在配置文件中定义bean类型可以和返回类型不一样；-->
+    <bean id="myFactoryBean" class="cn.start.pojo.MyFactoryBean"/>
+</beans>
