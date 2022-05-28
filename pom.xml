@@ -19,6 +19,9 @@
         <module>spring-08-mybatis</module>
         <module>spring-09-tx</module>
         <module>spring-07-aop-anno</module>
+        <module>spring-09-jdbctemplate</module>
+        <module>spring-02-start-3addbean</module>
+        <module>spring-02-start-01-3addbean</module>
     </modules>
 
 
