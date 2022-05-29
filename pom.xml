@@ -22,6 +22,7 @@
         <module>spring-09-jdbctemplate</module>
         <module>spring-02-start-3addbean</module>
         <module>spring-02-start-01-3addbean</module>
+        <module>spring-08-mybatis-tx</module>
     </modules>
 
 
